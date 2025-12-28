@@ -1,13 +1,57 @@
-# CUAVs-Coding-Challenge
+Canadian UAVs Coding Challenge
 
-Challenge Overview:
 
-At Canadian UAVs, we handle large amounts of geospatial data, which is the focus of this challenge. The task involves correlating data from two sensors that detect anomalies. However, the sensors are not highly accurate, resulting in false positives and variations in their location readings. Your challenge is to associate the sensor readings based on their coordinates to identify common signals that may have been detected by both sensors. This correlation increases the likelihood that the signal is a genuine detection rather than a false positive.
+This program correlates anomaly detections from two different sensors to identify signals that were likely detected by both systems.
 
-Input Data:
 
-The two sensors provide different output formats: one sensor outputs data in CSV format, and the other outputs data in JSON format. Please refer to the sample data for the exact format of each sensor's output. Both sensors assign a unique ID to each reading, but note that different sensors may use the same IDs. The sensor readings include location coordinates in decimal degrees, using the WGS 84 format, representing where the anomaly was detected. The sensors have an accuracy of 100 meters, meaning that the reported location is within 100 meters of the actual anomaly location.
+Each sensor has an accuracy of about 100 meters, so detections within 200 meters of each other are considered to be the same anomaly.
 
-Output:
 
-The output should consist of pairs of IDs, where one ID is from the first sensor, and the second ID is from the second sensor.
+⸻
+
+
+How It Works
+
+
+The program reads:
+
+  •	A CSV file from Sensor 1
+	
+  •	A JSON file from Sensor 2
+
+
+It calculates the distance between every pair of detections using the Haversine formula and matches detections that are within 200 meters.
+
+
+⸻
+
+
+How to Run
+
+
+Make sure Python 3 is installed, then run:
+
+python solution.py
+
+
+The results will be saved in output.json.
+
+
+⸻
+
+
+Output
+
+
+The output is a JSON dictionary where each key is an ID from Sensor 1 and the value is the matching ID from Sensor 2.
+
+
+Example:
+
+{
+
+    "56": 46,
+
+    "24": 74
+    
+}
